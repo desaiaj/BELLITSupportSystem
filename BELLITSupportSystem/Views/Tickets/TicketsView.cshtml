@@ -1,0 +1,39 @@
+﻿@model BELLITSupportSystem.Models.TicketModel
+
+@{
+    ViewBag.Title = "Requested Tickets";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="container">
+    <div class="table-responsive" id="TutorialsData" style="margin-top:20px;overflow:auto;">
+        <table class="table table-hover" style="width:100%;">
+            <thead>
+                <tr class="alert-info">
+                    <th>Ticket ID</th>
+                    <th>Project Name</th>
+                    <th>Department Name</th>
+                    <th>Requested by</th>
+                    <th>Submitted Date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            @{
+                foreach (var data in Model.lstTickets)
+                {
+                    <tr>
+                        <td>@data.TicketID</td>
+                        <td>@data.ProjectName</td>
+                        <td>@data.modelDepartment.DepartmentName</td>
+                        <td>@data.modelEmployee.EmployeeName</td>
+                        <td>@data.RequestedON.ToString()</td>
+                        <td>@data.Description</td>
+                    </tr>
+                }
+            }
+            <tfoot>Total Tutorials Found @Model.lstTickets.Count()</tfoot>
+        </table>
+    </div>
+
+</div>
