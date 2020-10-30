@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using DepartmentModel = BELLITSupportSystem.Models.DepartmentModel;
 using EmployeeModel = BELLITSupportSystem.Models.EmployeeModel;
 using TicketModel = BELLITSupportSystem.Models.TicketModel;
@@ -18,11 +19,9 @@ namespace BELLITSupportSystem.Controllers
         {
             serviceClient = new TicketServiceClient();
         }
+
         public ActionResult Index()
         {
-            //var d = serviceClient.GetAllDepartments();
-            //var d1 = serviceClient.GetAllEmployees();
-            // var d2 = serviceClient.GetAllTickets();
             TempData["IndexPage"] = "active";
             return View();
         }
@@ -73,19 +72,33 @@ namespace BELLITSupportSystem.Controllers
                 DepartmentID = x.DepartmentID,
                 DepartmentName = x.DepartmentName
             }));
-            return PartialView(objDepartment);
+            return PartialView("~/Views/Shared/_DepartmentList.cshtml", objDepartment);
         }
-        public PartialViewResult getEmployeesByDepartmentID(string DepartmentID = "0")
+
+        public PartialViewResult getEmployeesByDepartmentID(int DepartmentID = 0)
         {
             EmployeeModel objEmployee = new EmployeeModel();
             objEmployee.lstEmployees = new List<EmployeeModel>();
-            objEmployee.lstEmployees.AddRange(serviceClient.GetAllEmployees().Where(m => m.DepartmentID == int.Parse(DepartmentID)).Select(x => new EmployeeModel
+            objEmployee.lstEmployees.AddRange(serviceClient.GetAllEmployees().Where(m => m.DepartmentID == DepartmentID).Select(x => new EmployeeModel
             {
                 EmployeeID = x.EmployeeID,
                 EmployeeName = x.EmployeeName,
                 DepartmentID = x.DepartmentID
             }));
-            return PartialView(objEmployee);
+
+            if (objEmployee.lstEmployees.Count != 0)
+                return PartialView("~/Views/Shared/_EmployeeList.cshtml", objEmployee);
+            else
+                return null;
+        }
+
+        public ActionResult IssueTicket(TicketModel model)
+        {
+            bool isInserted = false;
+            if (model.EmployeeID != 0 && !model.ProjectName.IsEmpty() && !model.Description.IsEmpty())
+                isInserted = serviceClient.InsertTicket(model.ProjectName, model.EmployeeID, model.Description);
+            TempData["ActionStatus"] = isInserted;
+            return RedirectToAction("Index");
         }
     }
 }

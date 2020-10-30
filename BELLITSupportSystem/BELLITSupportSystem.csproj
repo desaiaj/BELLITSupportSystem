@@ -212,8 +212,8 @@
     <Content Include="Views\Tickets\TicketsView.cshtml" />
     <Content Include="Views\Tickets\TicketReport.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
-    <Content Include="Views\Shared\DepartmentList.cshtml" />
-    <Content Include="Views\Shared\EmployeeList.cshtml" />
+    <Content Include="Views\Shared\_DepartmentList.cshtml" />
+    <Content Include="Views\Shared\_EmployeeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

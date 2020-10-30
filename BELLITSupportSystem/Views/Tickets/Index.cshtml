@@ -1,22 +1,32 @@
 ﻿@model BELLITSupportSystem.Models.TicketModel
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Issue new Ticket";
 }
+<script>
+    var action = '@TempData["ActionStatus"]';
+    console.log("action" + action);
+</script>
+<h2>@ViewBag.Title</h2>
+<div>
+    <div id="msgFailure" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Danger!</strong> There was some proble issueing ticket, please try again
+    </div>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div id="msgSuccess" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Success!</strong> Ticket Issued Successfully
+    </div>
 </div>
-
 <div class="row jumbotron">
     @{
         Html.BeginForm("IssueTicket", "Tickets", FormMethod.Post);
     }
     <div class="col-md-4">
         <div class="form-group">
-            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = "Enter Project Name" })
+            @Html.Label("ProjectName", "Project Name")
+            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = "Enter Project Name", @required = true })
         </div>
         <div class="form-group">
             @{Html.RenderAction("DepartmentList");}
@@ -27,10 +37,11 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Description", @placeholder = "Description", @rows = "5" })
+            @Html.Label("Description", "Description of Problem")
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Description", @placeholder = "Describe the problem in brief...", @rows = "6", @required = true })
         </div>
         <div class="form-group" style="margin-top:5px">
-            <input type="button" class="btn btn-primary form-control" id="Submit" name="btnSubmit" value="Submit" />
+            <input type="submit" class="btn btn-primary form-control" id="Submit" name="btnSubmit" value="Submit" />
         </div>
     </div>
     @{ Html.EndForm(); }

@@ -9,9 +9,6 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -29,13 +26,88 @@
 .active {
     border-bottom: 3px solid white;
 }
-.active > a {
-    background-color: darkblue !important;
-}
+
+    .active > a {
+        background-color: darkblue !important;
+    }
+
 .navbar-inverse .navbar-nav > li > a {
     color: #c2cedf;
     font-size: 18px;
 }
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#msgFailure, #msgSuccess {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 40%; /*  */
+    bottom: 30px; /* 30px from the bottom */
+}
+
+#msgSuccess {
+    box-shadow: 0px 0px 18px green;
+}
+
+#msgFailure {
+    box-shadow: 0px 0px 18px red;
+}
+
+    #msgFailure.show, #msgSuccess.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
 
 @media (max-width: 400px) {
     .margin-right-lg {
@@ -44,5 +116,14 @@
 
     .navbar-toggle {
         margin-right: 10px;
+    }
+
+    #msgFailure, #msgSuccess {
+        visibility: hidden; /* Hidden by default. Visible on click */
+        position: fixed; /* Sit on top of the screen */
+        z-index: 1; /* Add a z-index if needed */
+        left: 10%; /* Center the snackbar */
+        box-shadow: 5px 5px 18px green;
+        bottom: 30px; /* 30px from the bottom */
     }
 }
