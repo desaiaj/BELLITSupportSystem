@@ -108,10 +108,19 @@
     }
 }
 
+.chart {
+    width: 100%;
+    height: 500px;
+}
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .margin-right-lg {
         margin-right: 0em;
+    }
+
+    .chart {
+        width: 100%;
+        height: 300px;
     }
 
     .navbar-toggle {

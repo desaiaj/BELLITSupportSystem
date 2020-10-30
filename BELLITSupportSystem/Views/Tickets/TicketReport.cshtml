@@ -1,17 +1,38 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Chart by Projects";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    var TicketsJson =@Html.Raw(Json.Encode(ViewBag.ChartData));  //prepare Json Data
+    var TicketDataTable = [['Project Name','Ticket Count']];  //Create Data array with Column Names For API
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    //console.log(TicketsJson);
+    for (var data of TicketsJson)  //Create DataTable for API to feed Chart
+        TicketDataTable.push([data["ProjectName"], data["Count"]]);
+
+    //console.log(TicketDataTable);
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(TicketDataTable);
+        // Sample Data for APi
+        //['Task', 'Hours per Day'],//Column Names
+            //['Work', 11]//values
+
+        var options = {
+            title: 'Total Count of Tickets associated with Projects',
+            pieHole: 0.4,
+            legend: { position: 'labeled', textStyle: { color: 'blue' } },
+            backgroundColor: "AliceBlue",
+            chartArea: { left: 30, right: 40, top: '15%', width: '100%', height: '75%' },
+            pieSliceText: 'value'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+    }
+</script>
+
+<div id="donutchart" class="chart"></div>

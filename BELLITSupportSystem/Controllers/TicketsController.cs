@@ -28,15 +28,16 @@ namespace BELLITSupportSystem.Controllers
 
         public ActionResult TicketReport()
         {
-            ViewBag.Message = "Your application description page.";
             TempData["TicketReport"] = "active";
 
+            var TicketCounter = serviceClient.GetAllTickets().GroupBy(x => x.ProjectName).Select(x => new { ProjectName = x.Key, Count = x.Count() });
+
+            ViewBag.ChartData = TicketCounter;
             return View();
         }
 
         public ActionResult TicketsView()
         {
-            ViewBag.Message = "All Requested Tickets";
             TicketModel objTicket = new TicketModel();
             objTicket.lstTickets = new List<TicketModel>();
             objTicket.lstTickets.AddRange(serviceClient.GetAllTickets().Select(x => new TicketModel
