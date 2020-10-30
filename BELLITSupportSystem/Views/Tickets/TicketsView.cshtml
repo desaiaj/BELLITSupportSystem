@@ -1,31 +1,31 @@
 ﻿@model BELLITSupportSystem.Models.TicketModel
 
 @{
-    ViewBag.Title = "Requested Tickets";
+    ViewBag.Title = Resources.Global.TicketsViewTitle;
 }
 <h2>@ViewBag.Title</h2>
-
 <div class="container">
     <div class="row jumbotron">
-        <h4><label style="padding:0px 5px 10px 5px;color:#0066CC;">Search Tickets</label></h4>
+        <h4><label style="padding:0px 5px 10px 5px;color:#0066CC;">@Resources.Global.SearchTickets</label></h4>
         <div class="form-inline">
             <div class="form-group">
-                @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = "Enter Project Name" })
+                @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = @Resources.Global.lblProjectName })
             </div>
             <div class="form-group">
-                @Html.TextBoxFor(m => m.modelDepartment.DepartmentName, new { @class = "form-control", @id = "Department", @placeholder = "Department wise" })
+                @Html.TextBoxFor(m => m.modelDepartment.DepartmentName, new { @class = "form-control", @id = "Department", @placeholder = Resources.Global.tblDepartmentName })
             </div>
             <div class="form-group">
-                @Html.TextBoxFor(m => m.RequestedON, new { @class = "form-control", @id = "RequestedOn", @placeholder = "Date & Time" })
+                @Html.TextBoxFor(m => m.RequestedON, new { @class = "datefield form-control", @id = "RequestedOn", @placeholder = Resources.Global.lblDateTime, @type = "datetime-local" })
             </div>
             <div class="form-group">
-                @Html.TextBoxFor(m => m.modelEmployee.EmployeeName, new { @class = "form-control", @id = "Employee", @placeholder = "Employee Name" })
+                @Html.TextBoxFor(m => m.modelEmployee.EmployeeName, new { @class = "form-control", @id = "Employee", @placeholder = Resources.Global.lblRequestedBy })
             </div>
             <div class="form-group">
-                @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @id = "Keywords", @placeholder = "Keywords", @value = "null" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Keywords", @placeholder = Resources.Global.lblDescription, @value = "null" })
             </div>
             <div class="form-group" style="margin-top:5px">
-                <input type="button" class="btn btn-primary form-control" id="SearchFile" name="btnSearch" value="Search" />
+                <input type="button" class="btn btn-primary form-control" id="Search" name="btnSearch" value="@Resources.Global.btnSearch" />
+                <input type="reset" class="btn btn-primary form-control" id="Reset" name="btnReset" value="@Resources.Global.btnSearch" />
             </div>
         </div>
     </div>
@@ -33,12 +33,12 @@
         <table class="table table-hover" style="width:100%;">
             <thead>
                 <tr class="alert-info">
-                    <th>Ticket ID</th>
-                    <th>Project Name</th>
-                    <th>Department Name</th>
-                    <th>Requested by</th>
-                    <th>Submitted On</th>
-                    <th>Description</th>
+                    <th>@Resources.Global.tblTicketID</th>
+                    <th>@Resources.Global.lblProjectName</th>
+                    <th>@Resources.Global.tblDepartmentName</th>
+                    <th>@Resources.Global.lblRequestedBy</th>
+                    <th>@Resources.Global.tblSubmittedOn</th>
+                    <th>@Resources.Global.lblDescription</th>
                 </tr>
             </thead>
             <tbody id="TicketsBody">
@@ -56,7 +56,7 @@
                     }
                 }
             </tbody>
-            <tfoot>Total Tutorials Found @Model.lstTickets.Count()</tfoot>
+            <tfoot>@Resources.Global.tblFooter @Model.lstTickets.Count()</tfoot>
         </table>
     </div>
 </div>

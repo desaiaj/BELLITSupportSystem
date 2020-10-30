@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Chart by Projects";
+    ViewBag.Title = Resources.Global.TicketReportTitle;
 }
 <h2>@ViewBag.Title.</h2>
 
@@ -19,10 +19,10 @@
         var data = google.visualization.arrayToDataTable(TicketDataTable);
         // Sample Data for APi
         //['Task', 'Hours per Day'],//Column Names
-            //['Work', 11]//values
+        //['Work', 11]//values
 
         var options = {
-            title: 'Total Count of Tickets associated with Projects',
+            title: '@Resources.Global.TicketChartTitle',
             pieHole: 0.4,
             legend: { position: 'labeled', textStyle: { color: 'blue' } },
             backgroundColor: "AliceBlue",

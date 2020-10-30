@@ -1,22 +1,21 @@
 ﻿@model BELLITSupportSystem.Models.TicketModel
 
 @{
-    ViewBag.Title = "Issue new Ticket";
+    ViewBag.Title = Resources.Global.TicketsViewTitle;
 }
 <script>
     var action = '@TempData["ActionStatus"]';
-    console.log("action" + action);
 </script>
 <h2>@ViewBag.Title</h2>
 <div>
     <div id="msgFailure" class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Danger!</strong> There was some proble issueing ticket, please try again
+        <strong>@Resources.Global.Danger!</strong> @Resources.Global.DangerTost
     </div>
 
     <div id="msgSuccess" class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Success!</strong> Ticket Issued Successfully
+        <strong>@Resources.Global.Success!</strong> @Resources.Global.SuccessTost
     </div>
 </div>
 <div class="row jumbotron">
@@ -25,8 +24,8 @@
     }
     <div class="col-md-4">
         <div class="form-group">
-            @Html.Label("ProjectName", "Project Name")
-            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = "Enter Project Name", @required = true })
+            @Html.Label("ProjectName", @Resources.Global.lblProjectName)
+            @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = @Resources.Global.lblProjectName, @required = true })
         </div>
         <div class="form-group">
             @{Html.RenderAction("DepartmentList");}
@@ -37,11 +36,11 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            @Html.Label("Description", "Description of Problem")
-            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Description", @placeholder = "Describe the problem in brief...", @rows = "6", @required = true })
+            @Html.Label("Description", @Resources.Global.lblDescription)
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Description", @placeholder = Resources.Global.PlaceHolderDesc, @rows = "6", @required = true })
         </div>
         <div class="form-group" style="margin-top:5px">
-            <input type="submit" class="btn btn-primary form-control" id="Submit" name="btnSubmit" value="Submit" />
+            <input type="submit" class="btn btn-primary form-control" id="Submit" name="btnSubmit" value="@Resources.Global.btnSubmit" />
         </div>
     </div>
     @{ Html.EndForm(); }

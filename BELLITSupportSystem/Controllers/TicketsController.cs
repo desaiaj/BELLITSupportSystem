@@ -12,7 +12,7 @@ using TicketModel = BELLITSupportSystem.Models.TicketModel;
 
 namespace BELLITSupportSystem.Controllers
 {
-    public class TicketsController : Controller
+    public class TicketsController : LanguageController
     {
         TicketServiceClient serviceClient;
         public TicketsController()
@@ -99,6 +99,12 @@ namespace BELLITSupportSystem.Controllers
             if (model.EmployeeID != 0 && !model.ProjectName.IsEmpty() && !model.Description.IsEmpty())
                 isInserted = serviceClient.InsertTicket(model.ProjectName, model.EmployeeID, model.Description);
             TempData["ActionStatus"] = isInserted;
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ChangeLanguage(string lang)
+        {
+            SetLanguage(lang);
             return RedirectToAction("Index");
         }
     }

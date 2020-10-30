@@ -5,5 +5,5 @@
     lstSelectList.Add(new SelectListItem { Text = "--- Select Employee ---", Value = "" });
     lstSelectList.AddRange(Model.lstEmployees.Select(m => new SelectListItem { Text = m.EmployeeName, Value = m.EmployeeID.ToString() }));
 }
-@Html.Label("RequestedBy", "Requested By")
+@Html.Label("RequestedBy", Resources.Global.lblRequestedBy)
 @Html.DropDownListFor(m => m.EmployeeID, lstSelectList, new { @class = "form-control", @id = "RequestedBy", @placeholder = "Employee Name", @required = true })

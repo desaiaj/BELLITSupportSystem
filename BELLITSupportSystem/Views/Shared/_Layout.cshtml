@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - @Resources.Global.ApplicationTitle</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,14 +20,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="@TempData["IndexPage"]">@Html.ActionLink("Generate Ticket", "Index", "Tickets")</li>
-                    <li class="@TempData["TicketsView"]">@Html.ActionLink("Tickets", "TicketsView", "Tickets")</li>
-                    <li class="@TempData["TicketReport"]">@Html.ActionLink("Ticket Report", "TicketReport", "Tickets")</li>
+                    <li class="@TempData["IndexPage"]">@Html.ActionLink(@Resources.Global.NavbarGenerateTicket, "Index", "Tickets")</li>
+                    <li class="@TempData["TicketsView"]">@Html.ActionLink(@Resources.Global.NavbarTickets, "TicketsView", "Tickets")</li>
+                    <li class="@TempData["TicketReport"]">@Html.ActionLink(@Resources.Global.NavbarTicketReport, "TicketReport", "Tickets")</li>
                 </ul>
             </div>
         </div>
     </div>
-
+    @Html.ActionLink("Française", "ChangeLanguage", "Tickets", new { lang = "fr" }, null)
+    @Html.ActionLink("English", "ChangeLanguage", "Tickets", new { lang = "en" }, null)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/TicketsMain")
     @Scripts.Render("~/bundles/bootstrap")
@@ -36,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Bell IT Support System </p>
+            <p>&copy; @DateTime.Now.Year - @Resources.Global.ApplicationTitle </p>
         </footer>
     </div>
 
