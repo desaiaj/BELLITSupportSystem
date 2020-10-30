@@ -8,8 +8,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        @Html.ActionLink("Bell IT Support Services", "Index", "Tickets", new { area = "" }, new { @class = "navbar-brand margin-right-lg" })
+    <div class="navbar navbar-inverse navbar-fixed-top shadow p-3 mb-5 bg-white rounded">
+        @Html.ActionLink("Bell IT Support Services", "Index", "Tickets", new { area = "" }, new { @class = "text-white navbar-brand margin-right-lg", @style = "color:white" })
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,13 +20,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">@Html.ActionLink("Generate Ticket", "Index", "Tickets")</li>
-                    <li>@Html.ActionLink("Tickets", "TicketsView", "Tickets")</li>
-                    <li>@Html.ActionLink("Ticket Report", "TicketReport", "Tickets")</li>
+                    <li class="@TempData["IndexPage"]">@Html.ActionLink("Generate Ticket", "Index", "Tickets")</li>
+                    <li class="@TempData["TicketsView"]">@Html.ActionLink("Tickets", "TicketsView", "Tickets")</li>
+                    <li class="@TempData["TicketReport"]">@Html.ActionLink("Ticket Report", "TicketReport", "Tickets")</li>
                 </ul>
             </div>
         </div>
     </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/TicketsMain")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -35,8 +40,5 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

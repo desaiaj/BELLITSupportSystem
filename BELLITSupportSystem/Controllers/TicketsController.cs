@@ -23,19 +23,21 @@ namespace BELLITSupportSystem.Controllers
             //var d = serviceClient.GetAllDepartments();
             //var d1 = serviceClient.GetAllEmployees();
             // var d2 = serviceClient.GetAllTickets();
+            TempData["IndexPage"] = "active";
             return View();
         }
 
         public ActionResult TicketReport()
         {
             ViewBag.Message = "Your application description page.";
+            TempData["TicketReport"] = "active";
 
             return View();
         }
 
         public ActionResult TicketsView()
         {
-            ViewBag.Message = "All Requested Tickets.";
+            ViewBag.Message = "All Requested Tickets";
             TicketModel objTicket = new TicketModel();
             objTicket.lstTickets = new List<TicketModel>();
             objTicket.lstTickets.AddRange(serviceClient.GetAllTickets().Select(x => new TicketModel
@@ -55,10 +57,35 @@ namespace BELLITSupportSystem.Controllers
                     EmployeeID = x.modelEmployee.EmployeeID,
                     EmployeeName = x.modelEmployee.EmployeeName,
                     DepartmentID = x.modelEmployee.DepartmentID
-                },
+                }
             }));
+            TempData["TicketsView"] = "active";
 
             return View(objTicket);
+        }
+
+        public PartialViewResult DepartmentList()
+        {
+            DepartmentModel objDepartment = new DepartmentModel();
+            objDepartment.lstDepartment = new List<DepartmentModel>();
+            objDepartment.lstDepartment.AddRange(serviceClient.GetAllDepartments().Select(x => new DepartmentModel
+            {
+                DepartmentID = x.DepartmentID,
+                DepartmentName = x.DepartmentName
+            }));
+            return PartialView(objDepartment);
+        }
+        public PartialViewResult getEmployeesByDepartmentID(string DepartmentID = "0")
+        {
+            EmployeeModel objEmployee = new EmployeeModel();
+            objEmployee.lstEmployees = new List<EmployeeModel>();
+            objEmployee.lstEmployees.AddRange(serviceClient.GetAllEmployees().Where(m => m.DepartmentID == int.Parse(DepartmentID)).Select(x => new EmployeeModel
+            {
+                EmployeeID = x.EmployeeID,
+                EmployeeName = x.EmployeeName,
+                DepartmentID = x.DepartmentID
+            }));
+            return PartialView(objEmployee);
         }
     }
 }

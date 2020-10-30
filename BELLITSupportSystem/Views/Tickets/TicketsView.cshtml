@@ -2,11 +2,34 @@
 
 @{
     ViewBag.Title = "Requested Tickets";
+    string cssIsActiveclass = "active";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@ViewBag.Title</h2>
 
 <div class="container">
+    <div class="row jumbotron">
+        <h4><label style="padding:0px 5px 10px 5px;color:#0066CC;">Search Tickets</label></h4>
+        <div class="form-inline">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = "Enter Project Name" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.modelDepartment.DepartmentName, new { @class = "form-control", @id = "Department", @placeholder = "Department wise" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.RequestedON, new { @class = "form-control", @id = "RequestedOn", @placeholder = "Date & Time" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.modelEmployee.EmployeeName, new { @class = "form-control", @id = "Employee", @placeholder = "Employee Name" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @id = "Keywords", @placeholder = "Keywords", @value = "null" })
+            </div>
+            <div class="form-group" style="margin-top:5px">
+                <input type="button" class="btn btn-primary form-control" id="SearchFile" name="btnSearch" value="Search" />
+            </div>
+        </div>
+    </div>
     <div class="table-responsive" id="TutorialsData" style="margin-top:20px;overflow:auto;">
         <table class="table table-hover" style="width:100%;">
             <thead>
@@ -19,21 +42,22 @@
                     <th>Description</th>
                 </tr>
             </thead>
-            @{
-                foreach (var data in Model.lstTickets)
-                {
-                    <tr>
-                        <td>@data.TicketID</td>
-                        <td>@data.ProjectName</td>
-                        <td>@data.modelDepartment.DepartmentName</td>
-                        <td>@data.modelEmployee.EmployeeName</td>
-                        <td>@data.RequestedON.ToString()</td>
-                        <td>@data.Description</td>
-                    </tr>
+            <tbody id="TicketsBody">
+                @{
+                    foreach (var data in Model.lstTickets)
+                    {
+                        <tr>
+                            <td>@data.TicketID</td>
+                            <td>@data.ProjectName</td>
+                            <td>@data.modelDepartment.DepartmentName</td>
+                            <td>@data.modelEmployee.EmployeeName</td>
+                            <td>@data.RequestedON.ToString()</td>
+                            <td>@data.Description</td>
+                        </tr>
+                    }
                 }
-            }
+            </tbody>
             <tfoot>Total Tutorials Found @Model.lstTickets.Count()</tfoot>
         </table>
     </div>
-
 </div>

@@ -10,5 +10,7 @@ namespace BELLITSupportSystem.Models
         public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public int DepartmentID { get; set; }
+
+        public List<EmployeeModel> lstEmployees = null;
     }
 }

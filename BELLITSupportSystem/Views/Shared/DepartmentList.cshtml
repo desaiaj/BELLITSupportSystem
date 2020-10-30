@@ -1,0 +1,11 @@
+﻿@model BELLITSupportSystem.Models.DepartmentModel
+<script>
+    var urlto = '@Url.Action("getEmployeesByDepartmentID","Tickets")';
+</script>
+@{
+    List<SelectListItem> lstSelectList = new List<SelectListItem>();
+    lstSelectList.Add(new SelectListItem { Text = "---Select Department---", Value = "" });
+    lstSelectList.AddRange(Model.lstDepartment.Select(m => new SelectListItem { Text = m.DepartmentName, Value = m.DepartmentID.ToString() }));
+}
+
+@Html.DropDownListFor(m => m.DepartmentID, lstSelectList, new { @class = "form-control", @id = "dlDepartment", @placeholder = "Department wise" })

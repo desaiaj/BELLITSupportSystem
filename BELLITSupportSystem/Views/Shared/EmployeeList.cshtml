@@ -1,0 +1,9 @@
+﻿@model BELLITSupportSystem.Models.EmployeeModel
+
+@{
+    List<SelectListItem> lstSelectList = new List<SelectListItem>();
+    lstSelectList.Add(new SelectListItem { Text = "---Select Employee---", Value = "" });
+    lstSelectList.AddRange(Model.lstEmployees.Select(m => new SelectListItem { Text = m.EmployeeName, Value = m.EmployeeID.ToString() }));
+}
+
+@Html.DropDownListFor(m => m.EmployeeID, lstSelectList, new { @class = "form-control", @id = "RequestedBy", @placeholder = "Employee Name", @disabled = true })
