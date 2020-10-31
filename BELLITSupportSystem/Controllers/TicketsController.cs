@@ -19,18 +19,22 @@ namespace BELLITSupportSystem.Controllers
             serviceClient = new TicketServiceClient();
         }
 
+        //Method To change the global Language of the Application
         public ActionResult ChangeLanguage(string lang)
         {
             SetLanguage(lang);
             return RedirectToAction("Index");
         }
 
+
+        //The Landing page (Generate Ticket)
         public ActionResult Index()
         {
             TempData["IndexPage"] = "active";
             return View();
         }
 
+        //Charts Page
         public ActionResult TicketReport()
         {
             TempData["TicketReport"] = "active";
@@ -41,6 +45,7 @@ namespace BELLITSupportSystem.Controllers
             return View();
         }
 
+        //Method to show All the Tickets
         public ActionResult TicketsView(TicketModel objTicket)
         {
             objTicket.lstTickets = new List<TicketModel>();
@@ -67,6 +72,8 @@ namespace BELLITSupportSystem.Controllers
 
             return View(objTicket);
         }
+
+        //Method to return filtered tickets
         public ActionResult SearchedTickets(TicketModel model)
         {
             TicketModel objTicket = new TicketModel();
@@ -95,6 +102,8 @@ namespace BELLITSupportSystem.Controllers
 
             return View("~/Views/Tickets/TicketsView.cshtml", objTicket);
         }
+
+        // supportive method to get all the departments for Dropdown list
         public PartialViewResult DepartmentList()
         {
             DepartmentModel objDepartment = new DepartmentModel();
@@ -107,6 +116,7 @@ namespace BELLITSupportSystem.Controllers
             return PartialView("~/Views/Shared/_DepartmentList.cshtml", objDepartment);
         }
 
+        //Supportive method to get all the emoloyees by DepartmentID (Dropdown list)
         public PartialViewResult getEmployeesByDepartmentID(int DepartmentID = 0)
         {
             EmployeeModel objEmployee = new EmployeeModel();
@@ -124,6 +134,7 @@ namespace BELLITSupportSystem.Controllers
                 return null;
         }
 
+        //Method to save Ticket
         public ActionResult IssueTicket(TicketModel model)
         {
             bool isInserted = false;

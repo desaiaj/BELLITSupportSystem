@@ -10,6 +10,7 @@ namespace BELLITSupportSystem.Controllers
 {
     public class LanguageController : Controller
     {
+        //Controller to handle language
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
             string lang = null;

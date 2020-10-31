@@ -9,6 +9,7 @@ namespace BELLITSupportSystem.Models
     {
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
+
         public List<DepartmentModel> lstDepartment = null;
     }
 }
