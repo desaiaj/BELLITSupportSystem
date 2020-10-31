@@ -95,6 +95,52 @@ namespace BELLITSupportSystemServices
             return null;
         }
 
+        public List<TicketModel> GetTicketBySearch(string ProjectName, string EmployeeName, string DepartmentName, string Description, string RequestedOn)
+        {
+            try
+            {
+                if ((ProjectName == null || ProjectName.Trim() == "") && (EmployeeName == null || EmployeeName.Trim() == "") && (DepartmentName == null || DepartmentName.Trim() == "") && (Description == null || Description == "") && (RequestedOn == null || RequestedOn.Trim() == ""))
+                {
+                    return GetAllTickets();
+                }
+                List<Ticket> objTickets = _context.Tickets.ToList();
+                List<TicketModel> lstTickets = new List<TicketModel>();
+
+                lstTickets.AddRange(objTickets.FindAll(
+                    x => (Description != null && x.Description.ToUpper().Contains(Description.ToUpper()))
+                    || (ProjectName != null && x.ProjectName.ToUpper().Contains(ProjectName.ToUpper()))
+                    || (RequestedOn != null && x.RequestedON.ToShortDateString().Equals(DateTime.Parse(RequestedOn).ToShortDateString()) && x.RequestedON.ToString("hh:mm").Equals(DateTime.Parse(RequestedOn).ToString("hh:mm")))
+                    || (EmployeeName != null && x.Employee.EmployeeName.ToUpper().Contains(EmployeeName.ToUpper()))
+                    || (DepartmentName != null && x.Employee.Department.DepartmentName.ToUpper().Contains(DepartmentName.ToUpper()))
+                ).Select(x => new TicketModel
+                {
+                    EmployeeID = x.EmployeeID,
+                    Description = x.Description,
+                    ProjectName = x.ProjectName,
+                    RequestedON = x.RequestedON,
+                    TicketID = x.TicketID,
+                    modelEmployee = new EmployeeModel()
+                    {
+                        EmployeeID = x.Employee.EmployeeID,
+                        EmployeeName = x.Employee.EmployeeName,
+                        DepartmentID = x.Employee.DepartmentID
+                    },
+                    modelDepartment = new DepartmentModel()
+                    {
+                        DepartmentID = x.Employee.Department.DepartmentID,
+                        DepartmentName = x.Employee.Department.DepartmentName
+                    }
+                }));
+
+                return lstTickets;
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("Custom Error: #" + e.Message);
+            }
+            return null;
+        }
+
         //GetData() - For Testing purpose, STRONG CANDIDATE FOR CODE CLEANING
         public string GetData(int value)
         {

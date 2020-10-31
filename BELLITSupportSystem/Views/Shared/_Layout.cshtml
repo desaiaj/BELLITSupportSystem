@@ -27,8 +27,10 @@
             </div>
         </div>
     </div>
-    @Html.ActionLink("Française", "ChangeLanguage", "Tickets", new { lang = "fr" }, null)
-    @Html.ActionLink("English", "ChangeLanguage", "Tickets", new { lang = "en" }, null)
+    <div style="float:right;margin-right:25px;margin-top:15px;">
+        @Html.ActionLink("Française", "ChangeLanguage", "Tickets", new { lang = "fr" }, null) | 
+        @Html.ActionLink("English", "ChangeLanguage", "Tickets", new { lang = "en" }, null)
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/TicketsMain")
     @Scripts.Render("~/bundles/bootstrap")

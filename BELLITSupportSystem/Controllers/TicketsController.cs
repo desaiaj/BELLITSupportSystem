@@ -1,5 +1,4 @@
 ﻿using BELLITSupportSystem.ITSupportServices;
-using BELLITSupportSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +19,12 @@ namespace BELLITSupportSystem.Controllers
             serviceClient = new TicketServiceClient();
         }
 
+        public ActionResult ChangeLanguage(string lang)
+        {
+            SetLanguage(lang);
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Index()
         {
             TempData["IndexPage"] = "active";
@@ -36,9 +41,8 @@ namespace BELLITSupportSystem.Controllers
             return View();
         }
 
-        public ActionResult TicketsView()
+        public ActionResult TicketsView(TicketModel objTicket)
         {
-            TicketModel objTicket = new TicketModel();
             objTicket.lstTickets = new List<TicketModel>();
             objTicket.lstTickets.AddRange(serviceClient.GetAllTickets().Select(x => new TicketModel
             {
@@ -63,7 +67,34 @@ namespace BELLITSupportSystem.Controllers
 
             return View(objTicket);
         }
+        public ActionResult SearchedTickets(TicketModel model)
+        {
+            TicketModel objTicket = new TicketModel();
+            objTicket.lstTickets = new List<TicketModel>();
 
+            objTicket.lstTickets.AddRange(serviceClient.GetTicketBySearch(model.ProjectName, model.modelEmployee.EmployeeName, model.modelDepartment.DepartmentName, model.Description, model.SubmittedON).Select(x => new TicketModel
+            {
+                EmployeeID = x.EmployeeID,
+                Description = x.Description,
+                ProjectName = x.ProjectName,
+                RequestedON = x.RequestedON,
+                TicketID = x.TicketID,
+                modelDepartment = new DepartmentModel
+                {
+                    DepartmentID = x.modelDepartment.DepartmentID,
+                    DepartmentName = x.modelDepartment.DepartmentName
+                },
+                modelEmployee = new EmployeeModel()
+                {
+                    EmployeeID = x.modelEmployee.EmployeeID,
+                    EmployeeName = x.modelEmployee.EmployeeName,
+                    DepartmentID = x.modelEmployee.DepartmentID
+                }
+            }));
+            TempData["TicketsView"] = "active";
+
+            return View("~/Views/Tickets/TicketsView.cshtml", objTicket);
+        }
         public PartialViewResult DepartmentList()
         {
             DepartmentModel objDepartment = new DepartmentModel();
@@ -102,10 +133,5 @@ namespace BELLITSupportSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ChangeLanguage(string lang)
-        {
-            SetLanguage(lang);
-            return RedirectToAction("Index");
-        }
     }
 }

@@ -31,6 +31,12 @@
   <wsdl:message name="ITicketService_GetAllTickets_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllTicketsResponse" />
   </wsdl:message>
+  <wsdl:message name="ITicketService_GetTicketBySearch_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTicketBySearch" />
+  </wsdl:message>
+  <wsdl:message name="ITicketService_GetTicketBySearch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTicketBySearchResponse" />
+  </wsdl:message>
   <wsdl:message name="ITicketService_InsertTicket_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertTicket" />
   </wsdl:message>
@@ -53,6 +59,10 @@
     <wsdl:operation name="GetAllTickets">
       <wsdl:input wsaw:Action="http://tempuri.org/ITicketService/GetAllTickets" message="tns:ITicketService_GetAllTickets_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITicketService/GetAllTicketsResponse" message="tns:ITicketService_GetAllTickets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTicketBySearch">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITicketService/GetTicketBySearch" message="tns:ITicketService_GetTicketBySearch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITicketService/GetTicketBySearchResponse" message="tns:ITicketService_GetTicketBySearch_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/ITicketService/InsertTicket" message="tns:ITicketService_InsertTicket_InputMessage" />
@@ -90,6 +100,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllTickets">
       <soap:operation soapAction="http://tempuri.org/ITicketService/GetAllTickets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTicketBySearch">
+      <soap:operation soapAction="http://tempuri.org/ITicketService/GetTicketBySearch" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

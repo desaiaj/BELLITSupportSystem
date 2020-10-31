@@ -118,6 +118,10 @@
         margin-right: 0em;
     }
 
+    .marging-Top-md {
+        margin-top: 5px;
+    }
+
     .chart {
         width: 100%;
         height: 300px;

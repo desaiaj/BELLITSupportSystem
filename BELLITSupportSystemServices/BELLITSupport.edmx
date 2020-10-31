@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BellTicketSupportDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BellTicketSupportDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Departments">
           <Key>
             <PropertyRef Name="DepartmentID" />
@@ -67,8 +67,7 @@
             <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BellTicketSupportDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -137,6 +136,22 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
+          <FunctionImport Name="getTicketsBySearch">
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+            <Parameter Name="EmployeeName" Mode="In" Type="String" />
+            <Parameter Name="DepartmentName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="RequestedOn" Mode="In" Type="String" />
+            <Parameter Name="Query" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getTicketsBy">
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+            <Parameter Name="EmployeeName" Mode="In" Type="String" />
+            <Parameter Name="DepartmentName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="RequestedOn" Mode="In" Type="String" />
+            <Parameter Name="Query" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>

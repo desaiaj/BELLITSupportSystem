@@ -12,19 +12,19 @@ namespace BELLITSupportSystemServices
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class BellTicketTrackingDBEntities : DbContext
     {
         public BellTicketTrackingDBEntities()
             : base("name=BellTicketTrackingDBEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }

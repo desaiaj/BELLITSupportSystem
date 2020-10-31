@@ -51,6 +51,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTicketBySearch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProjectName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EmployeeName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="RequestedOn" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTicketBySearchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BELLITSupportSystemServices" minOccurs="0" name="GetTicketBySearchResult" nillable="true" type="q4:ArrayOfTicketModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InsertTicket">
     <xs:complexType>
       <xs:sequence>

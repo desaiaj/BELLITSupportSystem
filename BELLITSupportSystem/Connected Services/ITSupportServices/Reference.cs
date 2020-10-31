@@ -320,6 +320,12 @@ namespace BELLITSupportSystem.ITSupportServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketService/GetAllTickets", ReplyAction="http://tempuri.org/ITicketService/GetAllTicketsResponse")]
         System.Threading.Tasks.Task<BELLITSupportSystem.ITSupportServices.TicketModel[]> GetAllTicketsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketService/GetTicketBySearch", ReplyAction="http://tempuri.org/ITicketService/GetTicketBySearchResponse")]
+        BELLITSupportSystem.ITSupportServices.TicketModel[] GetTicketBySearch(string ProjectName, string EmployeeName, string DepartmentName, string Description, string RequestedOn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketService/GetTicketBySearch", ReplyAction="http://tempuri.org/ITicketService/GetTicketBySearchResponse")]
+        System.Threading.Tasks.Task<BELLITSupportSystem.ITSupportServices.TicketModel[]> GetTicketBySearchAsync(string ProjectName, string EmployeeName, string DepartmentName, string Description, string RequestedOn);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketService/InsertTicket", ReplyAction="http://tempuri.org/ITicketService/InsertTicketResponse")]
         bool InsertTicket(string ProjectName, int EmployeeID, string Description);
         
@@ -384,6 +390,14 @@ namespace BELLITSupportSystem.ITSupportServices {
         
         public System.Threading.Tasks.Task<BELLITSupportSystem.ITSupportServices.TicketModel[]> GetAllTicketsAsync() {
             return base.Channel.GetAllTicketsAsync();
+        }
+        
+        public BELLITSupportSystem.ITSupportServices.TicketModel[] GetTicketBySearch(string ProjectName, string EmployeeName, string DepartmentName, string Description, string RequestedOn) {
+            return base.Channel.GetTicketBySearch(ProjectName, EmployeeName, DepartmentName, Description, RequestedOn);
+        }
+        
+        public System.Threading.Tasks.Task<BELLITSupportSystem.ITSupportServices.TicketModel[]> GetTicketBySearchAsync(string ProjectName, string EmployeeName, string DepartmentName, string Description, string RequestedOn) {
+            return base.Channel.GetTicketBySearchAsync(ProjectName, EmployeeName, DepartmentName, Description, RequestedOn);
         }
         
         public bool InsertTicket(string ProjectName, int EmployeeID, string Description) {

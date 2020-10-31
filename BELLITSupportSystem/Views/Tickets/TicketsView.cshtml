@@ -7,6 +7,7 @@
 <div class="container">
     <div class="row jumbotron">
         <h4><label style="padding:0px 5px 10px 5px;color:#0066CC;">@Resources.Global.SearchTickets</label></h4>
+        @{ Html.BeginForm("SearchedTickets", "Tickets", FormMethod.Post); }
         <div class="form-inline">
             <div class="form-group">
                 @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @id = "ProjectName", @placeholder = @Resources.Global.lblProjectName })
@@ -15,7 +16,15 @@
                 @Html.TextBoxFor(m => m.modelDepartment.DepartmentName, new { @class = "form-control", @id = "Department", @placeholder = Resources.Global.tblDepartmentName })
             </div>
             <div class="form-group">
-                @Html.TextBoxFor(m => m.RequestedON, new { @class = "datefield form-control", @id = "RequestedOn", @placeholder = Resources.Global.lblDateTime, @type = "datetime-local" })
+                @Html.TextBoxFor(m => m.SubmittedON, new
+           {
+               @class = "datefield form-control",
+               @id = "RequestedOn",
+               @placeholder = Resources.Global.lblDateTime,
+               @type = "datetime-local",
+               @value = "",
+               @pattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+           })
             </div>
             <div class="form-group">
                 @Html.TextBoxFor(m => m.modelEmployee.EmployeeName, new { @class = "form-control", @id = "Employee", @placeholder = Resources.Global.lblRequestedBy })
@@ -23,22 +32,25 @@
             <div class="form-group">
                 @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Keywords", @placeholder = Resources.Global.lblDescription, @value = "null" })
             </div>
-            <div class="form-group" style="margin-top:5px">
-                <input type="button" class="btn btn-primary form-control" id="Search" name="btnSearch" value="@Resources.Global.btnSearch" />
-                <input type="reset" class="btn btn-primary form-control" id="Reset" name="btnReset" value="@Resources.Global.btnSearch" />
+            <div class="form-inline" style="margin-top:5px">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control" id="Search" name="btnSearch" value="@Resources.Global.btnSearch" />
+                    @Html.ActionLink(@Resources.Global.btnReset, "TicketsView", "Tickets", null, new { @class = "btn btn-danger form-control marging-Top-md" })
+                </div>
             </div>
         </div>
+        @{ Html.EndForm(); }
     </div>
     <div class="table-responsive" id="TutorialsData" style="margin-top:20px;overflow:auto;">
-        <table class="table table-hover" style="width:100%;">
+        <table class="table table-hover" id="TicketsTable" style="width:100%;">
             <thead>
                 <tr class="alert-info">
-                    <th>@Resources.Global.tblTicketID</th>
-                    <th>@Resources.Global.lblProjectName</th>
-                    <th>@Resources.Global.tblDepartmentName</th>
-                    <th>@Resources.Global.lblRequestedBy</th>
-                    <th>@Resources.Global.tblSubmittedOn</th>
-                    <th>@Resources.Global.lblDescription</th>
+                    <th style="cursor:pointer" onclick="sortTable(0)">@Resources.Global.tblTicketID</th>
+                    <th style="cursor: pointer" onclick="sortTable(1)">@Resources.Global.lblProjectName</th>
+                    <th style="cursor: pointer" onclick="sortTable(2)">@Resources.Global.tblDepartmentName</th>
+                    <th style="cursor: pointer" onclick="sortTable(3)">@Resources.Global.lblRequestedBy</th>
+                    <th style="cursor: pointer" onclick="sortTable(4)">@Resources.Global.tblSubmittedOn</th>
+                    <th style="cursor: pointer" onclick="sortTable(5)">@Resources.Global.lblDescription</th>
                 </tr>
             </thead>
             <tbody id="TicketsBody">

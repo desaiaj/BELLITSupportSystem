@@ -29,6 +29,9 @@ namespace BELLITSupportSystemServices
         [OperationContract]
         List<TicketModel> GetAllTickets();
 
+        [OperationContract]
+        List<TicketModel> GetTicketBySearch(string ProjectName, string EmployeeName, string DepartmentName, string Description, string RequestedOn);
+
         #endregion
 
         #region Methods to Insert Data Into database

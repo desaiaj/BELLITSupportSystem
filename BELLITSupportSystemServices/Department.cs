@@ -11,8 +11,7 @@ namespace BELLITSupportSystemServices
 {
     using System;
     using System.Collections.Generic;
-    using System.ServiceModel;
-  
+    
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +19,10 @@ namespace BELLITSupportSystemServices
         {
             this.Employees = new HashSet<Employee>();
         }
+    
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
     }
